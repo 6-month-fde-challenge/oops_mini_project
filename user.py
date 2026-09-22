@@ -12,16 +12,18 @@ class User(ABC):
     """Base class shared by Student and Mentor."""
 
     # Class attributes - shared by the whole class, not by one object
-    total_users = 0
+    total_users = 0        # counts users of every kind
+    created = 0            # counts users of one particular class
     id_prefix = "USR"
 
     def __init__(self, name, email):
         if not self.is_valid_email(email):
             raise ValueError("Invalid email address: " + str(email))
 
-        User.total_users += 1
+        User.total_users += 1          # shared counter
+        type(self).created += 1        # Student and Mentor each count their own
         self.name = name
-        self._user_id = self.id_prefix + "-" + str(User.total_users).zfill(3)
+        self._user_id = self.id_prefix + "-" + str(type(self).created).zfill(3)
 
         # ENCAPSULATION: two underscores makes this attribute private.
         # It can only be read or changed through the email property below.
