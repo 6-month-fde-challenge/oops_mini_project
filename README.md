@@ -4,13 +4,16 @@ A small Course Management System written in Python to practise object oriented
 programming. It models the four things a real training institute deals with -
 **people**, **courses** and the **enrollments** that join them - and it was
 built through a normal Git workflow: feature branches, meaningful commits,
-merges and a pull request.
+merges and pull requests.
 
 The whole project is plain Python. There is nothing to install and no
 third party library to download.
 
 - **Repository:** https://github.com/6-month-fde-challenge/oops_mini_project
-- **Pull request:** https://github.com/6-month-fde-challenge/oops_mini_project/pull/1
+- **Pull requests:** [#1](https://github.com/6-month-fde-challenge/oops_mini_project/pull/1),
+  [#2](https://github.com/6-month-fde-challenge/oops_mini_project/pull/2),
+  [#3](https://github.com/6-month-fde-challenge/oops_mini_project/pull/3) - all merged
+- **Commit graph:** printed in full in [Git workflow](#git-workflow) below
 - Module 04 of the 6 month FDE challenge.
 
 ---
@@ -412,6 +415,8 @@ Each piece of work was built on its own branch and merged back into `main`.
 | `feature/course-and-enrollment` | `course.py`, `enrollment.py` | **pull request #1**, merged on GitHub |
 | `feature/demo-app` | `main.py` | local merge with `--no-ff` |
 | `docs/readme` | this `README.md` | local merge with `--no-ff` |
+| `add-more-summary` | an extra total in the summary report | **pull request #2**, merged on GitHub |
+| `docs/commit-graph` | the commit graph below | **pull request #3**, merged on GitHub |
 
 The pattern for a branch that was merged locally:
 
@@ -431,10 +436,10 @@ git push origin main
 the branch stays visible in the history instead of disappearing into a straight
 line.
 
-### 3. The pull request
+### 3. The pull requests
 
-`feature/course-and-enrollment` went through a real pull request instead of a
-local merge:
+Three branches went through a real pull request instead of a local merge.
+`feature/course-and-enrollment` was the first:
 
 ```bash
 git push -u origin feature/course-and-enrollment
@@ -446,21 +451,86 @@ git checkout main
 git pull origin main
 ```
 
-**Pull request #1:** https://github.com/6-month-fde-challenge/oops_mini_project/pull/1
-(merged)
+| Pull request | Branch | State |
+|---|---|---|
+| [#1](https://github.com/6-month-fde-challenge/oops_mini_project/pull/1) | `feature/course-and-enrollment` | merged |
+| [#2](https://github.com/6-month-fde-challenge/oops_mini_project/pull/2) | `add-more-summary` | merged |
+| [#3](https://github.com/6-month-fde-challenge/oops_mini_project/pull/3) | `docs/commit-graph` | merged |
 
-The review is recorded as a review **comment** rather than a green approval,
-because GitHub does not let you approve your own pull request and this project
-was built by one person on one account.
+The review on pull request #1 is recorded as a review **comment** rather than a
+green approval, because GitHub does not let you approve your own pull request
+and this project was built by one person on one account.
 
 ### 4. The resulting history
 
+This is the real output of `git log --graph`, copied straight from the
+terminal. Every feature branch is visible as its own line, and each merge is a
+separate commit.
+
+<!-- git-evidence:start -->
 ```console
-$ git log --graph --oneline --all
+$ git log --graph --oneline --all --decorate
+*   0ed5f7e (HEAD -> docs/commit-graph, origin/main, origin/HEAD, main) Merge pull request #2 from 6-month-fde-challenge/add-more-summary
+|\  
+| * 2138d60 (origin/add-more-summary, add-more-summary) added a new feature
+|/  
+* 0b490bb changes made
+* 5aef2a2 docs: add HISTORY.md with the captured git output
+*   ee4d2c4 Merge branch docs/readme into main
+|\  
+| * d12096c (origin/docs/readme, docs/readme) docs: add full README
+|/  
+*   5a34e82 Merge branch feature/demo-app into main
+|\  
+| * d266175 (origin/feature/demo-app, feature/demo-app) feat: add main.py demo program
+|/  
+*   835fe9a Merge pull request #1 from 6-month-fde-challenge/feature/course-and-enrollment
+|\  
+| * f56ca9c (origin/feature/course-and-enrollment, feature/course-and-enrollment) feat: add Enrollment class linking a student to a course
+| * 6225c4e feat: add Course class with private student list
+|/  
+*   e046cbd Merge branch feature/user-classes into main
+|\  
+| * dd8f1e0 (origin/feature/user-classes, feature/user-classes) feat: add Student and Mentor classes that inherit from User
+| * 7b7c857 feat: add abstract User base class
+|/  
+* 2d485df chore: set up repository with .gitignore
 ```
 
-The full graph is printed in [HISTORY.md](HISTORY.md), which is captured
-straight from the terminal after the last merge.
+The branches, local and on GitHub:
+
+```console
+$ git branch -a
+  add-more-summary
+* docs/commit-graph
+  docs/readme
+  feature/course-and-enrollment
+  feature/demo-app
+  feature/user-classes
+  main
+  remotes/origin/HEAD -> origin/main
+  remotes/origin/add-more-summary
+  remotes/origin/docs/readme
+  remotes/origin/feature/course-and-enrollment
+  remotes/origin/feature/demo-app
+  remotes/origin/feature/user-classes
+  remotes/origin/main
+```
+
+The pull requests:
+
+```console
+$ gh pr list --state all
+2	added a new feature	add-more-summary	MERGED	2026-09-22T15:49:39Z
+1	feat: add Course and Enrollment classes	feature/course-and-enrollment	MERGED	2026-09-22T12:06:40Z
+```
+
+Captured at commit `0ed5f7e`. The commit that saved this snapshot sits directly
+on top of it.
+<!-- git-evidence:end -->
+
+The same output, together with the branch list and the `.gitignore` check, is
+also kept in [HISTORY.md](HISTORY.md).
 
 ### Commands used in this project
 
