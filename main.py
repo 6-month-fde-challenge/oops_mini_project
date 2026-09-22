@@ -163,6 +163,7 @@ def main():
     lines.append("Totals: users=" + str(User.count())
                  + ", courses=" + str(Course.total_courses)
                  + ", enrollments=" + str(Enrollment.total_enrollments))
+    lines.append("Total courses=" + str(Course.total_courses))
 
     report = "\n".join(lines)
     print(report)
