@@ -1,0 +1,20 @@
+# Python cache files created every time the program runs
+__pycache__/
+*.pyc
+
+# Virtual environment
+.venv/
+venv/
+
+# Files the demo writes at runtime (not source code)
+*.local.txt
+
+# The assignment brief and personal notes - kept locally, not published
+task.txt
+notes.txt
+
+# Editor / OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
