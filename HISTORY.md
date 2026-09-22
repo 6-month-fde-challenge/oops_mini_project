@@ -2,13 +2,24 @@
 
 Everything below is real terminal output, copied straight from this repository
 after the last merge. It is committed so the branch structure, the merges and
-the pull request can be seen without leaving the files.
+the pull requests can be seen without leaving the files. The same graph is
+printed in the Git workflow section of the README.
 
 ## Branch structure and commit history
 
 ```console
 $ git log --graph --oneline --all --decorate
-*   ee4d2c4 (HEAD -> main, origin/main) Merge branch docs/readme into main
+*   a35dd81 (HEAD -> main, origin/main, origin/HEAD) Merge pull request #3 from 6-month-fde-challenge/docs/commit-graph
+|\  
+| * 94986e4 (origin/docs/commit-graph, docs/commit-graph) docs: print the commit graph inside the README
+|/  
+*   0ed5f7e Merge pull request #2 from 6-month-fde-challenge/add-more-summary
+|\  
+| * 2138d60 (origin/add-more-summary, add-more-summary) added a new feature
+|/  
+* 0b490bb changes made
+* 5aef2a2 docs: add HISTORY.md with the captured git output
+*   ee4d2c4 Merge branch docs/readme into main
 |\  
 | * d12096c (origin/docs/readme, docs/readme) docs: add full README
 |/  
@@ -33,11 +44,16 @@ $ git log --graph --oneline --all --decorate
 
 ```console
 $ git branch -a
+  add-more-summary
+  docs/commit-graph
   docs/readme
   feature/course-and-enrollment
   feature/demo-app
   feature/user-classes
 * main
+  remotes/origin/HEAD -> origin/main
+  remotes/origin/add-more-summary
+  remotes/origin/docs/commit-graph
   remotes/origin/docs/readme
   remotes/origin/feature/course-and-enrollment
   remotes/origin/feature/demo-app
@@ -45,19 +61,20 @@ $ git branch -a
   remotes/origin/main
 ```
 
-## Pull request
+## Pull requests
 
 ```console
 $ gh pr list --state all
+3	docs: print the commit graph inside the README	docs/commit-graph	MERGED	2026-09-22T18:07:27Z
+2	added a new feature	add-more-summary	MERGED	2026-09-22T15:49:39Z
 1	feat: add Course and Enrollment classes	feature/course-and-enrollment	MERGED	2026-09-22T12:06:40Z
 ```
 
 ## The .gitignore working
 
 After running `python main.py`, the folder holds `__pycache__/` and
-`report.local.txt`. Git does not see either of them: the only file it reports
-is this `HISTORY.md`, which was still untracked when the output was captured.
-`git check-ignore -v` names the rule and the line number that hid each one.
+`report.local.txt`. Git does not see either of them, and `git check-ignore -v`
+names the rule and the line number that hid each one:
 
 ```console
 $ ls
@@ -74,7 +91,7 @@ task.txt
 user.py
 
 $ git status --short
-?? HISTORY.md
+
 $ git check-ignore -v report.local.txt __pycache__ task.txt
 .gitignore:10:*.local.txt	report.local.txt
 .gitignore:2:__pycache__/	__pycache__

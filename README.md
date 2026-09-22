@@ -470,7 +470,11 @@ separate commit.
 <!-- git-evidence:start -->
 ```console
 $ git log --graph --oneline --all --decorate
-*   0ed5f7e (HEAD -> docs/commit-graph, origin/main, origin/HEAD, main) Merge pull request #2 from 6-month-fde-challenge/add-more-summary
+*   a35dd81 (HEAD -> main, origin/main, origin/HEAD) Merge pull request #3 from 6-month-fde-challenge/docs/commit-graph
+|\  
+| * 94986e4 (origin/docs/commit-graph, docs/commit-graph) docs: print the commit graph inside the README
+|/  
+*   0ed5f7e Merge pull request #2 from 6-month-fde-challenge/add-more-summary
 |\  
 | * 2138d60 (origin/add-more-summary, add-more-summary) added a new feature
 |/  
@@ -502,14 +506,15 @@ The branches, local and on GitHub:
 ```console
 $ git branch -a
   add-more-summary
-* docs/commit-graph
+  docs/commit-graph
   docs/readme
   feature/course-and-enrollment
   feature/demo-app
   feature/user-classes
-  main
+* main
   remotes/origin/HEAD -> origin/main
   remotes/origin/add-more-summary
+  remotes/origin/docs/commit-graph
   remotes/origin/docs/readme
   remotes/origin/feature/course-and-enrollment
   remotes/origin/feature/demo-app
@@ -521,12 +526,13 @@ The pull requests:
 
 ```console
 $ gh pr list --state all
+3	docs: print the commit graph inside the README	docs/commit-graph	MERGED	2026-09-22T18:07:27Z
 2	added a new feature	add-more-summary	MERGED	2026-09-22T15:49:39Z
 1	feat: add Course and Enrollment classes	feature/course-and-enrollment	MERGED	2026-09-22T12:06:40Z
 ```
 
-Captured at commit `0ed5f7e`. The commit that saved this snapshot sits directly
-on top of it.
+Captured at commit `a35dd81`. Only the commit that saved this snapshot sits
+above it.
 <!-- git-evidence:end -->
 
 The same output, together with the branch list and the `.gitignore` check, is
